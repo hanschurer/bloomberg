@@ -5,6 +5,16 @@ from collections import Counter
 # 1. All Characters have same frequency
 # 2. If we can remove only 1 character and make it a cool string
 
+
+#  Create a function that returns true or false 
+#  depending on whether the string passed in is 
+#  valid or not.
+
+#  A string is valid if all characters have an equal 
+#  number of occurrences within it. 
+#  You may also remove one character from the string 
+#  to make it valid.
+
 # Example:
 
 # aaabbb -> true
