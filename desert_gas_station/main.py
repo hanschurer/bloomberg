@@ -1,3 +1,5 @@
+# https://www.1point3acres.com/bbs/thread-1148287-1-1.html
+
 # 题目是用一个2d character array来当沙漠，其中有一个element “c” 来当作车 和一个element “o” 来当作绿洲。求从车到绿洲的最短步数。你写代码就行、不用执行代码
 
 # Follow up 1: 如果我们车只有一定量的油、每过一格会消耗一个unit的油、你会怎么改变你的algorithm
