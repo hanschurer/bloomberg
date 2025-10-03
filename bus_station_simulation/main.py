@@ -4,8 +4,6 @@ import math
 # 10/03/2025 Bloomberg Coding Challenge 26ng 1st Round
 
 # You are given a list of stations represented as a string separated by hyphens (-), and a dictionary bus_list that maps each bus_id to its current station.
-
-
 # The buses only move from left to right along the stations (e.g., A → B → C …).
 # You need to implement a system with the following methods:
 
