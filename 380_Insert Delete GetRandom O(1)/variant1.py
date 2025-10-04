@@ -16,4 +16,13 @@
 #                      their ID.
 #                      Return -1 if there are no participants left.        
 
+
+
+# — Title: Trading Symbols Set with O(1) Ops
+# Difficulty: Medium
+# Prompt: Design a data structure for a trading platform to manage a dynamic set of stock symbols. Support: add(symbol), remove(symbol), and getRandom() that returns a uniformly random symbol from the current set—all in average O(1) time. Do not use built-in random-set libraries.
+
+# ⸻
+
+
 # https://leetcode.com/discuss/post/6607794/bloomberg-intern-swe-london-offered-by-k-jnlw/
