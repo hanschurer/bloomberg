@@ -15,3 +15,20 @@ class Solution:
                 res+=c
         
         return res
+
+    # using a list to store the current string, then join at the end
+    def decodeString2(self, s: str) -> str:
+        st, curr, num = [], [], 0
+        for c in s:
+            if c.isdigit():
+                num = num * 10 + int(c)
+            elif c == '[':
+                st.append((num, curr))
+                num = 0
+                curr = []
+            elif c == ']':
+                cur_num, prev_s = st.pop()
+                curr = prev_s + cur_num * curr
+            else:
+                curr.append(c)
+        return ''.join(curr)
