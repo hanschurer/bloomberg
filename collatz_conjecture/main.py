@@ -44,3 +44,25 @@ class CollatzConjecture2:
         count = self.count_steps(val // 2 if val % 2 == 0 else 3 * val + 1) + 1
         self.memos[val] = count
         return count
+# ---------------- Unit Test ----------------
+def run_test(description, actual, expected):
+    result = "PASS" if actual == expected else "FAIL"
+    print(f"{description}: Expected={expected}, Actual={actual} --> {result}")
+
+if __name__ == "__main__":
+    memo = {1: 0}  # base case
+    solution = CollatzConjecture()
+    # Classic small numbers
+    run_test("Collatz(1)", solution.count_steps(1), 0)
+    run_test("Collatz(2)", solution.count_steps(2), 1)   # 2 -> 1
+    run_test("Collatz(3)", solution.count_steps(3), 7)   # 3 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
+    run_test("Collatz(6)", solution.count_steps(6), 8)   # known sequence length
+    run_test("Collatz(7)", solution.count_steps(7), 16)  # longer chain
+
+    # Larger numbers
+    run_test("Collatz(19)", solution.count_steps(19), 20)
+    run_test("Collatz(27)", solution.count_steps(27), 111)  # famous long chain
+
+    # Repeated calls should hit memo and be O(1)
+    run_test("Collatz(3) again (memoized)", solution.count_steps(3), 7)
+    run_test("Collatz(19) again (memoized)", solution.count_steps(19), 20)
