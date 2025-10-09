@@ -1,4 +1,4 @@
-# Collections of Bloomberg BQ Questions
+# Bloomberg BQ Questions
 
 1. Why Bloomberg?
 2. Could you walk me through one of your resume experiences?

@@ -43,3 +43,100 @@ A call to tracker.display_average_rates() should produce the following output:
 USD: 7.4
 EUR: 8.0
 '''
+import math
+from collections import defaultdict
+
+
+class BankCurrency:
+    def __init__(self, bank: str = "BankA"):
+        self.bank = bank
+        self.currency_dict = defaultdict(float)
+
+    def update(self, currency: str, rate: float):
+        self.currency_dict[currency] = rate
+
+    # return True if this is new currency type
+    # return False if it exits
+    def check_new_currency(self, currency: str):
+        return currency not in self.currency_dict
+
+
+class FxRateTracker:
+    def __init__(self):
+        # class attributes
+        # map bank to its currency and rate
+        # key: bank id, value: BankCurrency Object
+        self.bank_map = defaultdict(BankCurrency)
+        # key: currency type, value: [total, count] -> calculate average
+        self.currency_map = defaultdict(list)
+
+    # TODO: update operation
+    def add_rate(self, bank: str, currency: str, rate: float) -> None:
+        # first add bank
+        if bank not in self.bank_map:
+            item = BankCurrency(bank)
+            item.update(currency, rate)
+            self.bank_map[bank] = item
+        else:
+            # whether to add new currency
+            item = self.bank_map[bank]
+            if item.check_new_currency(currency):
+                item.update(currency, rate)
+            # update existing currency
+            else:
+                # clear the odd currency in counting map
+                prev_rate = item.currency_dict[currency]
+                # update the count and total sum
+                self.currency_map[currency][0] -= prev_rate
+                self.currency_map[currency][1] -= 1
+                item.update(currency, rate)
+
+        # first add the currency
+        if currency not in self.currency_map:
+            self.currency_map[currency] = [rate, 1]
+        else:
+            total, count = self.currency_map[currency]
+            self.currency_map[currency] = [total + rate, count + 1]
+
+    def display_average_rates(self) -> dict:
+        result = {}
+        for currency, (total, count) in self.currency_map.items():
+            if count > 0:
+                result[currency] = round(total / count, 2)
+        return result
+
+
+# ---------------- 测试工具函数 ----------------
+def run_test(description, actual, expected):
+    result = "PASS" if actual == expected else "FAIL"
+    print(f"{description}: Expected={expected}, Actual={actual} --> {result}")
+
+
+# ---------------- 主函数测试 ----------------
+if __name__ == "__main__":
+    tracker = FxRateTracker()
+
+    print("=== Case 1: 基础示例 ===")
+    tracker.add_rate("BankA", "USD", 7.2)
+    tracker.add_rate("BankB", "USD", 7.3)
+    tracker.add_rate("BankC", "EUR", 8.0)
+    tracker.add_rate("BankA", "USD", 7.5)  # 更新
+
+    avg_rates = tracker.display_average_rates()
+    run_test("USD 平均值", avg_rates["USD"], 7.40)
+    run_test("EUR 平均值", avg_rates["EUR"], 8.00)
+
+    print("\n=== Case 2: 新银行加入 ===")
+    tracker.add_rate("BankD", "USD", 7.1)
+    avg_rates = tracker.display_average_rates()
+    run_test("USD 平均值 (3家银行)", avg_rates["USD"], round((7.5 + 7.3 + 7.1) / 3, 2))
+
+    print("\n=== Case 3: 同一银行新增新货币 ===")
+    tracker.add_rate("BankA", "JPY", 110.0)
+    avg_rates = tracker.display_average_rates()
+    run_test("JPY 平均值", avg_rates["JPY"], 110.0)
+
+    print("\n=== Case 4: 更新已有货币 ===")
+    tracker.add_rate("BankB", "USD", 7.6)  # 更新 BankB 的 USD
+    avg_rates = tracker.display_average_rates()
+    run_test("USD 平均值 (更新后)", avg_rates["USD"], round((7.5 + 7.6 + 7.1) / 3, 2))
