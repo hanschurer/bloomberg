@@ -1,8 +1,33 @@
 '''
 source: https://www.1point3acres.com/bbs/thread-1147946-1-1.html
-遇到一道题：大概是给定一个牌堆（允许有重复的数字），再给两个输入参数：抽牌数量k，以及目标和target。
-从牌堆里不放回抽出k张牌，如果它们的和等于target就算赢，否则算输。题目要求返回玩家获胜的概率。 求加米！
-背包问题
+You are given a deck of cards represented as an integer array deck, where each element is the value of a card. The deck may contain duplicate values.
+You are also given two integers:
+    k — the number of cards to draw (without replacement).
+    target — the desired sum.
+
+A player wins if the sum of the selected k cards equals target. Otherwise, the player loses.
+
+Your task is to compute and return the probability of winning.
+
+Examples:
+Input: deck = [1, 2, 3, 4], k = 2, target = 5
+Output: 0.3333
+Explanation:
+All possible 2-card draws:
+[1,2]=3, [1,3]=4, [1,4]=5, [2,3]=5, [2,4]=6, [3,4]=7
+Favorable draws = {[1,4], [2,3]} → 2 out of 6
+Probability = 2/6 = 0.3333
+
+Input: deck = [2, 2, 3], k = 2, target = 4
+Output: 0.3333
+Explanation:
+Possible draws: [2,2]=4, [2,3]=5, [2,3]=5
+Favorable draws = {[2,2]} → 1 out of 3
+Probability = 1/3 = 0.3333
+
+Constrains:
+0 <= k <= 100
+
 '''
 from typing import List
 from math import comb
