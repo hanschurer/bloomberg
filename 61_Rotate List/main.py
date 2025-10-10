@@ -25,3 +25,4 @@ class Solution:
         dummy.next = head
 
         return new_head
+        
