@@ -14,3 +14,21 @@ Populate each next pointer to point to its next right node. If there is no next 
 
 Initially, all next pointers are set to NULL.
 '''
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root: return 
+        q = deque([root])
+
+        while q:
+            pre = None
+            for _ in range(len(q)):
+                node = q.popleft()
+                if pre:
+                    pre.next = node
+                pre = node
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+        return root
