@@ -1,6 +1,11 @@
 # https://www.1point3acres.com/bbs/thread-963278-1-1.html
 # candy crush 的原题
 
+
+# — Title: Clean Canceling Trade Pairs in Log II
+# Difficulty: Medium
+# Prompt: Given a trade action string, repeatedly remove groups of k adjacent identical characters (e.g., k identical “B” = buy corrections) until no more removals are possible. Return the final string (the cleaned trade log).
+
 class Solution:
     '''
     NOTE

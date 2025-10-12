@@ -1,6 +1,12 @@
 # https://www.1point3acres.com/bbs/thread-1121985-1-1.html
 from collections import defaultdict
 
+
+# — Title: Longest Unique Client Session
+# Difficulty: Medium
+# Prompt: Given a session log string where each character represents a client token, return the length of the longest substring without repeating tokens, representing the longest continuous window of unique client activity.
+
+
 # 标准解法
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
@@ -30,3 +36,6 @@ class Solution:
         return res
 
 # Follow up: 如果要找所有長度最長的substring，多放了一個set去記錄左右端點，最後再用for loop 加回去
+
+
+

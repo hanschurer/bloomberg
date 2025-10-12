@@ -1,3 +1,7 @@
+# — Title: Merge Maintenance Windows
+# Difficulty: Medium
+# Prompt: Given a list of market data maintenance windows (time intervals) on trading servers, merge all overlapping intervals and return the consolidated schedule.
+
 class Solution:
     def merge(self, intervals):
         #sort intervals by the start value

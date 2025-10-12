@@ -19,6 +19,7 @@ class UndergroundSystem:
         # optional, but we'll discuss the benefits of it in the space complexity
         # analysis section.
         start_station, start_time = self.check_in_data.pop(id)
+        
         self.journey_data[(start_station, end_station)][0] += (t - start_time)
         self.journey_data[(start_station, end_station)][1] += 1
             
