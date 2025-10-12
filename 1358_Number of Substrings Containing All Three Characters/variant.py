@@ -1,7 +1,5 @@
 from collections import defaultdict
 
-
-
 # 【第二题】
 # 输入：
 # 一个仅由小写英文字母组成的字符串 s。
@@ -43,3 +41,41 @@ class Solution:
                 res += len(s) - r
         
         return res
+
+# 和面试官讨论后，所期望的解法：
+def countInVowelBlock_lastPos(block: str) -> int:
+    """
+    使用“记录最新位置”的方法来计算。
+    """
+    total_count = 0
+    n = len(block)
+    last_pos = {'a': -1, 'e': -1, 'i': -1, 'o': -1, 'u': -1}
+    
+    for i in range(n):
+        # 1. 更新当前字符的最新位置
+        last_pos[block[i]] = i
+        
+        # 2. 找到五个元音最新位置中的最小值
+        start_of_window = min(last_pos.values())
+        
+        # 3. 如果 start_of_window > -1，说明五个元音都出现过了
+        if start_of_window > -1:
+            # 4. 累加合法的子串数量
+            total_count += (start_of_window + 1)
+            
+    return total_count
+
+def is_vowel(char: str) -> bool:
+    return char in 'aeiou'
+
+def countVowelSubstrings_main(s: str) -> int:
+    total_count = 0
+    n = len(s)
+    start = 0
+    for i in range(n + 1):
+        if i == n or not is_vowel(s[i]):
+            vowel_block = s[start:i]
+            if vowel_block:
+                total_count += countInVowelBlock_lastPos(vowel_block)
+            start = i + 1
+    return total_count

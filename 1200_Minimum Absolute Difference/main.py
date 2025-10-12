@@ -1,3 +1,4 @@
+# Follow up: 找到符合条件的所有pairs
 class Solution:
     def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
         m, ans = inf, []
