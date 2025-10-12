@@ -1,4 +1,10 @@
 # https://leetcode.com/problems/design-underground-system/description/
+
+# — Title: Design Commuter Cost Tracker for Branches
+# Difficulty: Medium
+# Prompt: Build a system to track average travel times (costs) between company sites (e.g., “JFK→Manhattan”, “Boston→NYC”) for employees traveling on expense accounts. Implement checkIn(id, siteName, time), checkOut(id, siteName, time), and getAverageTime(startSite, endSite) to return the average duration between two sites across all completed trips.
+
+
 class UndergroundSystem:
 
     def __init__(self):
