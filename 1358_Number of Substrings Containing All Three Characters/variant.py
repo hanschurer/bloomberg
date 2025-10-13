@@ -106,3 +106,8 @@ def countVowelSubstrings2(s: str) -> int:
         res += slow - pivot
     return res
 
+s = "aaeiouxa"
+print(countVowelSubstrings2(s))  # 2
+
+s2 = "aaeiouxaaeiou"
+print(countVowelSubstrings2(s2)) # 4
