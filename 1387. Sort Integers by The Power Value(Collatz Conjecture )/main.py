@@ -1,3 +1,7 @@
+from functools import cache
+
+
+# 这道题必须是 Iterative approach，不能是 Recursive approach，会被挂
 @cache  # 缓存装饰器，避免重复计算 dfs 的结果（记忆化）
 def dfs(i: int) -> int:
     if i == 1:
