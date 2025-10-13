@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import List
 
-
+# variant: 输入已按照时间排序）
 class Solution:
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
         trans = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
