@@ -1,6 +1,8 @@
 '''
 edge cases:
 one char
+
+variant: what if the input and output is int
 '''
 
 
