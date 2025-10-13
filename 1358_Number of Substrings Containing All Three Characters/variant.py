@@ -79,3 +79,30 @@ def countVowelSubstrings_main(s: str) -> int:
                 total_count += countInVowelBlock_lastPos(vowel_block)
             start = i + 1
     return total_count
+
+
+# 双指针滑动窗口，使用 pivot 记录最后一个非元音字母的位置
+def countVowelSubstrings2(s: str) -> int:
+    window = defaultdict(int)
+    res = slow = pivot = 0
+    vowel_cnt = set()
+    vowels = 'aeiou'
+
+    for fast, curr in enumerate(s):
+        window[curr] += 1
+        if curr in vowels:
+            vowel_cnt.add(curr)
+
+        while slow <= fast and (
+                len(vowel_cnt) >= 5 or (curr not in vowels and curr in window)):
+            if window[s[slow]] == 1 and s[slow] in vowels:
+                vowel_cnt.remove(s[slow])
+            window[s[slow]] -= 1
+            if not window[s[slow]]:
+                del window[s[slow]]
+            slow += 1
+            if curr not in vowels:
+                pivot = fast + 1
+        res += slow - pivot
+    return res
+
