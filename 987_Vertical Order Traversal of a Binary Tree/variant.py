@@ -18,7 +18,7 @@ class TreeNode:
         self.right = None
 
 def build_tree(idx: int, arr: List[str]) -> Optional[TreeNode]:
-    if idx >= len(arr):
+    if idx >= len(arr) or not arr[idx]:
         return None
     root = TreeNode(arr[idx])
     root.left = build_tree(idx * 2 + 1, arr)
@@ -39,6 +39,24 @@ def decrypt(root: TreeNode) -> str:
     return "".join(c for _, c in sorted(pos.items()))
 
 
+'''
+     i
+    / \
+   r   e
+  / \
+ p   c
+'''
 vals = ['i', 'r', 'e', 'p', 'c']
+root = build_tree(0, vals)
+print(decrypt(root))  # 'price'
+
+'''
+     i
+    / \
+   r   e
+  /   /
+ p   c
+'''
+vals = ['i', 'r', 'e', 'p', None, 'c']
 root = build_tree(0, vals)
 print(decrypt(root))  # 'price'
