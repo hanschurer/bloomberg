@@ -51,6 +51,7 @@ def candy_crush(s, k):
                 stack.append([s[i], 1])
     if stack and stack[-1][1]>=k:
         stack.pop()
+        
     return ''.join(char*freq for char, freq in stack)
 
 
