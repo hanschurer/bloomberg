@@ -27,7 +27,9 @@ Output Format:
 '''
 import heapq
 from collections import defaultdict
-
+#可以和面试官讨论，
+# 1. 添加频率高， 用heap， 添加O1， 查询nlogK
+# 2. 查询频率高， 用sortedList 切片只需要k的时间复杂度
 
 class StockTrader:
     """
@@ -79,6 +81,7 @@ class StockTrader:
         top_k_sorted = sorted(min_heap, key=lambda x: x[0], reverse=True)
 
         return [stock for volume, stock in top_k_sorted]
+
 
 
 # --- 示例使用 ---
