@@ -81,33 +81,67 @@ def countVowelSubstrings_main(s: str) -> int:
     return total_count
 
 
-# 双指针滑动窗口，使用 pivot 记录最后一个非元音字母的位置
+'''
+# 输入：
+# 一个仅由小写英文字母组成的字符串 s。
+# 目标：
+# 计算字符串 s 中有多少个子串同时满足以下两个条件：
+# 该子串只包含元音字母（a, e, i, o, u）。
+# 该子串中，五个元音字母 a, e, i, o, u 必须全部都出现至少一次。和LeetCode 1358 类似。
+
+TODO
+s = "aaeiiiouuuuuuuxawaeiouhaaaaaaeiou"
+找到 s 中所有符合条件的子串
+
+NOTE
+s => ["aaeiiiouuuuuuu", "a", "aeiou", "aaaaaaeiou"]
+        l     r          X      1           l   r     => return 21
+       2 * 7 = 14                       6 * 1 = 6
+找最短的，包含所有元音的子串，然后计算左右两边有多少 vowels, 相乘即为结果
+
+'''
+from collections import defaultdict
+
+
 def countVowelSubstrings2(s: str) -> int:
-    window = defaultdict(int)
-    res = slow = pivot = 0
-    vowel_cnt = set()
+    # parse vowels substrs
+    vowel_strs = []
     vowels = 'aeiou'
+    pivot = res = 0
+    for i, c in enumerate(s):
+        if c not in vowels:
+            vowel_strs.append(s[pivot: i])
+            pivot = i + 1
+    vowel_strs.append(s[pivot:])
 
-    for fast, curr in enumerate(s):
-        window[curr] += 1
-        if curr in vowels:
-            vowel_cnt.add(curr)
-
-        while slow <= fast and (
-                len(vowel_cnt) >= 5 or (curr not in vowels and curr in window)):
-            if window[s[slow]] == 1 and s[slow] in vowels:
-                vowel_cnt.remove(s[slow])
-            window[s[slow]] -= 1
-            if not window[s[slow]]:
-                del window[s[slow]]
-            slow += 1
-            if curr not in vowels:
-                pivot = fast + 1
-        res += slow - pivot
+    # calculate with sliding window
+    for v_s in vowel_strs:
+        if len(v_s) < 5:
+            continue
+        l, r = 0, len(v_s) - 1
+        slow = 0
+        min_len = len(v_s)
+        window = defaultdict(int)
+        for fast, curr in enumerate(v_s):
+            window[curr] += 1
+            while slow <= fast and len(window) >= 5:
+                if fast - slow + 1 < min_len:
+                    min_len = fast - slow + 1
+                    l, r = slow, fast
+                window[v_s[slow]] -= 1
+                if not window[v_s[slow]]:
+                    del window[v_s[slow]]
+                slow += 1
+        l_cpt, r_cpt = l + 1, len(v_s) - r
+        res += l_cpt * r_cpt
     return res
+
+
+s = "aaeiiiouuuuuuuxawaeiouhaaaaaaeiou"
+print(countVowelSubstrings2(s))  # 21
 
 s = "aaeiouxa"
 print(countVowelSubstrings2(s))  # 2
 
-s2 = "aaeiouxaaeiou"
-print(countVowelSubstrings2(s2)) # 4
+s = "aaeiouxaaeiou"
+print(countVowelSubstrings2(s))  # 4
