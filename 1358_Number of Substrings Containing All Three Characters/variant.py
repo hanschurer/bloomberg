@@ -9,45 +9,6 @@ from collections import defaultdict
 # 该子串中，五个元音字母 a, e, i, o, u 必须全部都出现至少一次。和LeetCode 1358 类似。
 
 
-# 和面试官讨论后，所期望的解法：
-def countInVowelBlock_lastPos(block: str) -> int:
-    """
-    使用“记录最新位置”的方法来计算。
-    """
-    total_count = 0
-    n = len(block)
-    last_pos = {'a': -1, 'e': -1, 'i': -1, 'o': -1, 'u': -1}
-    
-    for i in range(n):
-        # 1. 更新当前字符的最新位置
-        last_pos[block[i]] = i
-        
-        # 2. 找到五个元音最新位置中的最小值
-        start_of_window = min(last_pos.values())
-        
-        # 3. 如果 start_of_window > -1，说明五个元音都出现过了
-        if start_of_window > -1:
-            # 4. 累加合法的子串数量
-            total_count += (start_of_window + 1)
-            
-    return total_count
-
-def is_vowel(char: str) -> bool:
-    return char in 'aeiou'
-
-def countVowelSubstrings_main(s: str) -> int:
-    total_count = 0
-    n = len(s)
-    start = 0
-    for i in range(n + 1):
-        if i == n or not is_vowel(s[i]):
-            vowel_block = s[start:i]
-            if vowel_block:
-                total_count += countInVowelBlock_lastPos(vowel_block)
-            start = i + 1
-    return total_count
-
-
 '''
 TODO
 s = "aaeiiiouuuuuuuxawaeiouhaaaaaaeiou"
@@ -61,7 +22,7 @@ ans += left
 内层循环结束时，右端点固定在 right, 左端点在 0, 1, 2, ..., left - 1, 一共有 left 个
 
 '''
-def countVowelSubstrings2(s: str) -> int:
+def countVowelSubstrings(s: str) -> int:
     # parse vowels substrs
     vowel_strs = []
     vowels = 'aeiou'
@@ -90,13 +51,13 @@ def countVowelSubstrings2(s: str) -> int:
 
 
 s = "aaeiiiouuuuuuuxawaeiouhaaaaaaeiou"
-print(countVowelSubstrings2(s))  # 21
+print(countVowelSubstrings(s))  # 21
 
 s = "aaeiouxa"
-print(countVowelSubstrings2(s))  # 2
+print(countVowelSubstrings(s))  # 2
 
 s = "aaeiouxaaeiou"
-print(countVowelSubstrings2(s))  # 4
+print(countVowelSubstrings(s))  # 4
 
 
 '''
@@ -111,7 +72,7 @@ s => ["aaeiiiouuuuuuu", "a", "aeiou", "aaaaaaeiou"]
 找最短的，包含所有元音的子串，然后计算左右两边有多少 vowels, 相乘即为结果
 
 '''
-def countVowelSubstrings3(s: str) -> int:
+def countVowelSubstrings2(s: str) -> int:
     # parse vowels substrs
     vowel_strs = []
     vowels = 'aeiou'
@@ -146,10 +107,10 @@ def countVowelSubstrings3(s: str) -> int:
 
 
 s = "aaeiiiouuuuuuuxawaeiouhaaaaaaeiou"
-print(countVowelSubstrings3(s))  # 21
+print(countVowelSubstrings2(s))  # 21
 
 s = "aaeiouxa"
-print(countVowelSubstrings3(s))  # 2
+print(countVowelSubstrings2(s))  # 2
 
 s = "aaeiouxaaeiou"
-print(countVowelSubstrings3(s))  # 4
+print(countVowelSubstrings2(s))  # 4
