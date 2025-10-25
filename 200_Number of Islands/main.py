@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List
 
 
@@ -65,3 +66,28 @@ class Solution:
                             neighbors.append((row, col + 1))
                             grid[row][col + 1] = "0"
         return num_islands
+
+    '''
+    Optimized with BFS
+    TC: O(m * n)
+    SC: min(m, n)
+    '''
+    def numIslands(self, grid: List[List[str]]) -> int:
+        ans, m, n = 0, len(grid), len(grid[0])
+
+        def bfs(row: int, col: int) -> None:
+            q = deque([(row, col)])
+            while q:
+                x, y = q.popleft()
+                for nr, nc in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                    if 0 <= nr < m and 0 <= nc < n and grid[nr][nc] == '1':
+                        grid[nr][nc] = '0'
+                        q.append((nr, nc))
+
+        for row, cols in enumerate(grid):
+            for col, val in enumerate(cols):
+                if val == '1':
+                    grid[row][col] = '0'
+                    bfs(row, col)
+                    ans += 1
+        return ans
