@@ -1,0 +1,22 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res: List[str] = []  
+
+        def backtrack(path: List[str], open_used: int, close_used: int) -> None:  
+            if len(path) == 2 * n:  # a complete string if we placed 2n characters
+                res.append("".join(path))  
+                return  # backtrack to explore other possibilities
+
+            if open_used < n:  # we can still place an '(' if we haven't used all n opens
+                path.append('(') 
+                backtrack(path, open_used + 1, close_used)  # recurse with one more open used
+                path.pop()  # undo the choice to try other branches
+
+            if close_used < open_used:  # we can place ')' only if it won't make string invalid
+                path.append(')')  
+                backtrack(path, open_used, close_used + 1)  # recurse with one more close used
+                path.pop()  # undo the choice to try additional branches
+
+        backtrack([], 0, 0)  
+        return res  
+        
