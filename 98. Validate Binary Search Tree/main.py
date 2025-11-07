@@ -19,3 +19,7 @@ class Solution:
             return dfs(root.right)
         
         return dfs(root)
+    
+
+# follow-up in phone screen: Time complexity O(n): 
+#                           interviewer asked is this the best case or worst case time complexity

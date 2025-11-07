@@ -28,19 +28,19 @@ def print_deepest_parentheses(s: str) -> list:
         
         return result
 
-    # 测试示例
-    if __name__ == "__main__":
-        test_cases = [
-            "a(b(c)d)e",          # 输出: ['c']
-            "a(b(c)d(e)f)g",      # 输出: ['c', 'e']
-            "((a)b(c))",          # 输出: ['a', 'c']
-            "abc(def)ghi",        # 输出: ['def']
-            "((((test))))",       # 输出: ['test']
-            "no parentheses here" # 输出: []
-        ]
-        
-        for case in test_cases:
-            print(f"输入: {case}")
-            print(f"最深括号内容: {print_deepest_parentheses(case)}\n")
+# 测试示例
+if __name__ == "__main__":
+    test_cases = [
+        "a(b(c)d)e",          # 输出: ['c']
+        "a(b(c)d(e)f)g",      # 输出: ['c', 'e']
+        "((a)b(c))",          # 输出: ['a', 'c']
+        "abc(def)ghi",        # 输出: ['def']
+        "((((test))))",       # 输出: ['test']
+        "no parentheses here" # 输出: []
+    ]
+    
+    for case in test_cases:
+        print(f"输入: {case}")
+        print(f"最深括号内容: {print_deepest_parentheses(case)}\n")
 
 

@@ -15,6 +15,11 @@ class Solution:
                 res+=c
         
         return res
+    
+    # follow-up in phone screen: Time complexity and Space complexity
+    #               Interviewer keep asking about the space complexity in some edge cases
+    #                              O(n): he asked does n mean the input size or have other meaning
+
 
     # using a list to store the current string, then join at the end
     def decodeString2(self, s: str) -> str:
@@ -32,3 +37,4 @@ class Solution:
             else:
                 curr.append(c)
         return ''.join(curr)
+    
